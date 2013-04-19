@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:types="urn:oasis:names:tc:wsrp:v1:types" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn:oasis:names:tc:wsrp:v1:types" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import schemaLocation="http://www.w3.org/2001/xml.xsd" namespace="http://www.w3.org/XML/1998/namespace" />
+  <xsd:simpleType name="Handle">
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="1" />
+      <xsd:maxLength value="255" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:element name="Handle" type="types:Handle" />
+  <xsd:simpleType name="ID">
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="1" />
+      <xsd:maxLength value="4096" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:element name="ID" type="types:ID" />
+  <xsd:simpleType name="Key">
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="1" />
+      <xsd:maxLength value="255" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:element name="Key" type="types:Key" />
+  <xsd:complexType name="Extension">
+    <xsd:sequence>
+      <xsd:any namespace="##other" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="LocalizedString">
+    <xsd:sequence>
+      <xsd:element name="value" type="xsd:string" />
+    </xsd:sequence>
+    <xsd:attribute ref="xml:lang" use="required" />
+    <xsd:attribute name="resourceName" type="xsd:string" />
+  </xsd:complexType>
+  <xsd:complexType name="ResourceList">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" name="resources" type="types:Resource" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Resource">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" name="values" type="types:ResourceValue" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+    <xsd:attribute name="resourceName" type="xsd:string" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="ResourceValue">
+    <xsd:sequence>
+      <xsd:element name="value" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+    <xsd:attribute ref="xml:lang" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="StringArray">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="String" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="StringArray" type="types:StringArray" />
+  <xsd:complexType name="NamedString">
+    <xsd:sequence>
+      <xsd:element name="value" type="xsd:string" />
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="NamedStringArray">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="NamedString" type="types:NamedString" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NamedStringArray" type="types:NamedStringArray" />
+  <xsd:complexType name="RegistrationData">
+    <xsd:sequence>
+      <xsd:element name="consumerName" type="xsd:string" />
+      <xsd:element name="consumerAgent" type="xsd:string" />
+      <xsd:element name="methodGetSupported" type="xsd:boolean" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="consumerModes" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="consumerWindowStates" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="consumerUserScopes" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="customUserProfileData" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="registrationProperties" type="types:Property" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="RegistrationData" type="types:RegistrationData" />
+  <xsd:complexType name="RegistrationState">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="registrationState" type="xsd:base64Binary" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="RegistrationState" type="types:RegistrationState" />
+  <xsd:complexType name="RegistrationContext">
+    <xsd:sequence>
+      <xsd:element name="registrationHandle" type="xsd:string" />
+      <xsd:element minOccurs="0" name="registrationState" type="xsd:base64Binary" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="RegistrationContext" type="types:RegistrationContext" />
+  <xsd:complexType name="SessionContext">
+    <xsd:sequence>
+      <xsd:element name="sessionID" type="xsd:string" />
+      <xsd:element name="expires" type="xsd:int" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="SessionContext" type="types:SessionContext" />
+  <xsd:complexType name="RuntimeContext">
+    <xsd:sequence>
+      <xsd:element name="userAuthentication" type="xsd:string" />
+      <xsd:element minOccurs="0" name="portletInstanceKey" type="xsd:string" />
+      <xsd:element minOccurs="0" name="namespacePrefix" type="xsd:string" />
+      <xsd:element minOccurs="0" name="templates" type="types:Templates" />
+      <xsd:element minOccurs="0" name="sessionID" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="RuntimeContext" type="types:RuntimeContext" />
+  <xsd:complexType name="ItemDescription">
+    <xsd:sequence>
+      <xsd:element name="description" type="types:LocalizedString" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+    <xsd:attribute name="itemName" type="xsd:string" use="required" />
+  </xsd:complexType>
+  <xsd:simpleType name="CookieProtocol">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="none" />
+      <xsd:enumeration value="perUser" />
+      <xsd:enumeration value="perGroup" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="ServiceDescription">
+    <xsd:sequence>
+      <xsd:element name="requiresRegistration" type="xsd:boolean" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="offeredPortlets" type="types:PortletDescription" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="userCategoryDescriptions" type="types:ItemDescription" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="customUserProfileItemDescriptions" type="types:ItemDescription" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="customWindowStateDescriptions" type="types:ItemDescription" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="customModeDescriptions" type="types:ItemDescription" />
+      <xsd:element minOccurs="0" default="none" name="requiresInitCookie" type="types:CookieProtocol" />
+      <xsd:element minOccurs="0" name="registrationPropertyDescription" type="types:ModelDescription" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="locales" type="xsd:string" />
+      <xsd:element minOccurs="0" name="resourceList" type="types:ResourceList" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="ServiceDescription" type="types:ServiceDescription" />
+  <xsd:complexType name="MarkupType">
+    <xsd:sequence>
+      <xsd:element name="mimeType" type="xsd:string" />
+      <xsd:element maxOccurs="unbounded" name="modes" type="xsd:string" />
+      <xsd:element maxOccurs="unbounded" name="windowStates" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="locales" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PortletDescription">
+    <xsd:sequence>
+      <xsd:element name="portletHandle" type="xsd:string" />
+      <xsd:element maxOccurs="unbounded" name="markupTypes" type="types:MarkupType" />
+      <xsd:element minOccurs="0" name="groupID" type="xsd:string" />
+      <xsd:element minOccurs="0" name="description" type="types:LocalizedString" />
+      <xsd:element minOccurs="0" name="shortTitle" type="types:LocalizedString" />
+      <xsd:element minOccurs="0" name="title" type="types:LocalizedString" />
+      <xsd:element minOccurs="0" name="displayName" type="types:LocalizedString" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="keywords" type="types:LocalizedString" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="userCategories" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="userProfileItems" type="xsd:string" />
+      <xsd:element minOccurs="0" default="false" name="usesMethodGet" type="xsd:boolean" />
+      <xsd:element minOccurs="0" default="false" name="defaultMarkupSecure" type="xsd:boolean" />
+      <xsd:element minOccurs="0" default="false" name="onlySecure" type="xsd:boolean" />
+      <xsd:element minOccurs="0" default="false" name="userContextStoredInSession" type="xsd:boolean" />
+      <xsd:element minOccurs="0" default="false" name="templatesStoredInSession" type="xsd:boolean" />
+      <xsd:element minOccurs="0" default="false" name="hasUserSpecificState" type="xsd:boolean" />
+      <xsd:element minOccurs="0" default="false" name="doesUrlTemplateProcessing" type="xsd:boolean" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PortletDescriptionResponse">
+    <xsd:sequence>
+      <xsd:element name="portletDescription" type="types:PortletDescription" />
+      <xsd:element minOccurs="0" name="resourceList" type="types:ResourceList" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PortletContext">
+    <xsd:sequence>
+      <xsd:element name="portletHandle" type="xsd:string" />
+      <xsd:element minOccurs="0" name="portletState" type="xsd:base64Binary" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="PortletContext" type="types:PortletContext" />
+  <xsd:complexType name="DestroyFailed">
+    <xsd:sequence>
+      <xsd:element name="portletHandle" type="xsd:string" />
+      <xsd:element name="reason" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ClientData">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="userAgent" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="ClientData" type="types:ClientData" />
+  <xsd:complexType name="CacheControl">
+    <xsd:sequence>
+      <xsd:element name="expires" type="xsd:int" />
+      <xsd:element name="userScope" type="xsd:string" />
+      <xsd:element minOccurs="0" name="validateTag" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Templates">
+    <xsd:sequence>
+      <xsd:element name="defaultTemplate" nillable="true" type="xsd:string" />
+      <xsd:element minOccurs="0" name="blockingActionTemplate" type="xsd:string" />
+      <xsd:element minOccurs="0" name="renderTemplate" type="xsd:string" />
+      <xsd:element minOccurs="0" name="resourceTemplate" type="xsd:string" />
+      <xsd:element name="secureDefaultTemplate" nillable="true" type="xsd:string" />
+      <xsd:element minOccurs="0" name="secureBlockingActionTemplate" type="xsd:string" />
+      <xsd:element minOccurs="0" name="secureRenderTemplate" type="xsd:string" />
+      <xsd:element minOccurs="0" name="secureResourceTemplate" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="Templates" type="types:Templates" />
+  <xsd:complexType name="MarkupParams">
+    <xsd:sequence>
+      <xsd:element name="secureClientCommunication" type="xsd:boolean" />
+      <xsd:element maxOccurs="unbounded" name="locales" type="xsd:string" />
+      <xsd:element maxOccurs="unbounded" name="mimeTypes" type="xsd:string" />
+      <xsd:element name="mode" type="xsd:string" />
+      <xsd:element name="windowState" type="xsd:string" />
+      <xsd:element minOccurs="0" name="clientData" type="types:ClientData" />
+      <xsd:element minOccurs="0" name="navigationalState" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="markupCharacterSets" type="xsd:string" />
+      <xsd:element minOccurs="0" name="validateTag" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="validNewModes" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="validNewWindowStates" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="MarkupParams" type="types:MarkupParams" />
+  <xsd:complexType name="MarkupResponse">
+    <xsd:sequence>
+      <xsd:element name="markupContext" type="types:MarkupContext" />
+      <xsd:element minOccurs="0" name="sessionContext" type="types:SessionContext" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MarkupContext">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" default="false" name="useCachedMarkup" type="xsd:boolean" />
+      <xsd:element minOccurs="0" name="mimeType" type="xsd:string" />
+      <xsd:element minOccurs="0" name="markupString" type="xsd:string" />
+      <xsd:element minOccurs="0" name="markupBinary" type="xsd:base64Binary" />
+      <xsd:element minOccurs="0" name="locale" type="xsd:string" />
+      <xsd:element minOccurs="0" default="false" name="requiresUrlRewriting" type="xsd:boolean" />
+      <xsd:element minOccurs="0" name="cacheControl" type="types:CacheControl" />
+      <xsd:element minOccurs="0" name="preferredTitle" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="StateChange">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="readWrite" />
+      <xsd:enumeration value="cloneBeforeWrite" />
+      <xsd:enumeration value="readOnly" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="UploadContext">
+    <xsd:sequence>
+      <xsd:element name="mimeType" type="xsd:string" />
+      <xsd:element name="uploadData" type="xsd:base64Binary" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="mimeAttributes" type="types:NamedString" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InteractionParams">
+    <xsd:sequence>
+      <xsd:element name="portletStateChange" type="types:StateChange" />
+      <xsd:element minOccurs="0" name="interactionState" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="formParameters" type="types:NamedString" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="uploadContexts" type="types:UploadContext" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="InteractionParams" type="types:InteractionParams" />
+  <xsd:complexType name="UpdateResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="sessionContext" type="types:SessionContext" />
+      <xsd:element minOccurs="0" name="portletContext" type="types:PortletContext" />
+      <xsd:element minOccurs="0" name="markupContext" type="types:MarkupContext" />
+      <xsd:element name="navigationalState" nillable="true" type="xsd:string" />
+      <xsd:element minOccurs="0" name="newWindowState" type="xsd:string" />
+      <xsd:element minOccurs="0" name="newMode" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="BlockingInteractionResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="updateResponse" type="types:UpdateResponse" />
+      <xsd:element minOccurs="0" name="redirectURL" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="BlockingInteractionResponse" type="types:BlockingInteractionResponse" />
+  <xsd:complexType name="Postal">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="name" type="xsd:string" />
+      <xsd:element minOccurs="0" name="street" type="xsd:string" />
+      <xsd:element minOccurs="0" name="city" type="xsd:string" />
+      <xsd:element minOccurs="0" name="stateprov" type="xsd:string" />
+      <xsd:element minOccurs="0" name="postalcode" type="xsd:string" />
+      <xsd:element minOccurs="0" name="country" type="xsd:string" />
+      <xsd:element minOccurs="0" name="organization" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TelephoneNum">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="intcode" type="xsd:string" />
+      <xsd:element minOccurs="0" name="loccode" type="xsd:string" />
+      <xsd:element minOccurs="0" name="number" type="xsd:string" />
+      <xsd:element minOccurs="0" name="ext" type="xsd:string" />
+      <xsd:element minOccurs="0" name="comment" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Telecom">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="telephone" type="types:TelephoneNum" />
+      <xsd:element minOccurs="0" name="fax" type="types:TelephoneNum" />
+      <xsd:element minOccurs="0" name="mobile" type="types:TelephoneNum" />
+      <xsd:element minOccurs="0" name="pager" type="types:TelephoneNum" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Online">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="email" type="xsd:string" />
+      <xsd:element minOccurs="0" name="uri" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Contact">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="postal" type="types:Postal" />
+      <xsd:element minOccurs="0" name="telecom" type="types:Telecom" />
+      <xsd:element minOccurs="0" name="online" type="types:Online" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="Contact" type="types:Contact" />
+  <xsd:complexType name="EmployerInfo">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="employer" type="xsd:string" />
+      <xsd:element minOccurs="0" name="department" type="xsd:string" />
+      <xsd:element minOccurs="0" name="jobtitle" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PersonName">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="prefix" type="xsd:string" />
+      <xsd:element minOccurs="0" name="given" type="xsd:string" />
+      <xsd:element minOccurs="0" name="family" type="xsd:string" />
+      <xsd:element minOccurs="0" name="middle" type="xsd:string" />
+      <xsd:element minOccurs="0" name="suffix" type="xsd:string" />
+      <xsd:element minOccurs="0" name="nickname" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="UserProfile">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="name" type="types:PersonName" />
+      <xsd:element minOccurs="0" name="bdate" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" name="gender" type="xsd:string" />
+      <xsd:element minOccurs="0" name="employerInfo" type="types:EmployerInfo" />
+      <xsd:element minOccurs="0" name="homeInfo" type="types:Contact" />
+      <xsd:element minOccurs="0" name="businessInfo" type="types:Contact" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="UserContext">
+    <xsd:sequence>
+      <xsd:element name="userContextKey" type="xsd:string" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="userCategories" type="xsd:string" />
+      <xsd:element minOccurs="0" name="profile" type="types:UserProfile" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="UserContext" type="types:UserContext" />
+  <xsd:complexType name="Property">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="stringValue" type="xsd:string" />
+      <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##other" />
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string" use="required" />
+    <xsd:attribute ref="xml:lang" />
+  </xsd:complexType>
+  <xsd:complexType name="ResetProperty">
+    <xsd:sequence />
+    <xsd:attribute name="name" type="xsd:string" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="PropertyList">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="properties" type="types:Property" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="resetProperties" type="types:ResetProperty" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="PropertyList" type="types:PropertyList" />
+  <xsd:complexType name="PropertyDescription">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="label" type="types:LocalizedString" />
+      <xsd:element minOccurs="0" name="hint" type="types:LocalizedString" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string" use="required" />
+    <xsd:attribute name="type" type="xsd:QName" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="ModelTypes">
+    <xsd:sequence>
+      <xsd:any namespace="##other" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ModelDescription">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="propertyDescriptions" type="types:PropertyDescription" />
+      <xsd:element minOccurs="0" name="modelTypes" type="types:ModelTypes" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="ModelDescription" type="types:ModelDescription" />
+  <xsd:complexType name="PortletPropertyDescriptionResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="modelDescription" type="types:ModelDescription" />
+      <xsd:element minOccurs="0" name="resourceList" type="types:ResourceList" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ReturnAny">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="getMarkup">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="registrationContext" nillable="true" type="types:RegistrationContext" />
+        <xsd:element name="portletContext" type="types:PortletContext" />
+        <xsd:element name="runtimeContext" type="types:RuntimeContext" />
+        <xsd:element name="userContext" nillable="true" type="types:UserContext" />
+        <xsd:element name="markupParams" type="types:MarkupParams" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="getMarkupResponse" type="types:MarkupResponse" />
+  <xsd:element name="performBlockingInteraction">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="registrationContext" nillable="true" type="types:RegistrationContext" />
+        <xsd:element name="portletContext" type="types:PortletContext" />
+        <xsd:element name="runtimeContext" type="types:RuntimeContext" />
+        <xsd:element name="userContext" nillable="true" type="types:UserContext" />
+        <xsd:element name="markupParams" type="types:MarkupParams" />
+        <xsd:element name="interactionParams" type="types:InteractionParams" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="performBlockingInteractionResponse" type="types:BlockingInteractionResponse" />
+  <xsd:element name="getServiceDescription">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="registrationContext" nillable="true" type="types:RegistrationContext" />
+        <xsd:element minOccurs="0" maxOccurs="unbounded" name="desiredLocales" type="xsd:string" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="getServiceDescriptionResponse" type="types:ServiceDescription" />
+  <xsd:element name="register" type="types:RegistrationData" />
+  <xsd:element name="registerResponse" type="types:RegistrationContext" />
+  <xsd:element name="deregister" type="types:RegistrationContext" />
+  <xsd:element name="deregisterResponse" type="types:ReturnAny" />
+  <xsd:element name="modifyRegistration">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="registrationContext" nillable="true" type="types:RegistrationContext" />
+        <xsd:element name="registrationData" type="types:RegistrationData" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="modifyRegistrationResponse" type="types:RegistrationState" />
+  <xsd:element name="getPortletDescription">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="registrationContext" nillable="true" type="types:RegistrationContext" />
+        <xsd:element name="portletContext" type="types:PortletContext" />
+        <xsd:element name="userContext" nillable="true" type="types:UserContext" />
+        <xsd:element minOccurs="0" maxOccurs="unbounded" name="desiredLocales" type="xsd:string" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="getPortletDescriptionResponse" type="types:PortletDescriptionResponse" />
+  <xsd:element name="clonePortlet">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="registrationContext" nillable="true" type="types:RegistrationContext" />
+        <xsd:element name="portletContext" type="types:PortletContext" />
+        <xsd:element name="userContext" nillable="true" type="types:UserContext" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="clonePortletResponse" type="types:PortletContext" />
+  <xsd:element name="destroyPortlets">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="registrationContext" nillable="true" type="types:RegistrationContext" />
+        <xsd:element maxOccurs="unbounded" name="portletHandles" type="xsd:string" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="DestroyPortletsResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="destroyFailed" type="types:DestroyFailed" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="extensions" type="types:Extension" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="destroyPortletsResponse" type="types:DestroyPortletsResponse" />
+  <xsd:element name="setPortletProperties">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="registrationContext" nillable="true" type="types:RegistrationContext" />
+        <xsd:element name="portletContext" type="types:PortletContext" />
+        <xsd:element name="userContext" nillable="true" type="types:UserContext" />
+        <xsd:element name="propertyList" type="types:PropertyList" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="setPortletPropertiesResponse" type="types:PortletContext" />
+  <xsd:element name="getPortletProperties">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="registrationContext" nillable="true" type="types:RegistrationContext" />
+        <xsd:element name="portletContext" type="types:PortletContext" />
+        <xsd:element name="userContext" nillable="true" type="types:UserContext" />
+        <xsd:element maxOccurs="unbounded" name="names" nillable="true" type="xsd:string" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="getPortletPropertiesResponse" type="types:PropertyList" />
+  <xsd:element name="getPortletPropertyDescription">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="registrationContext" nillable="true" type="types:RegistrationContext" />
+        <xsd:element name="portletContext" type="types:PortletContext" />
+        <xsd:element name="userContext" nillable="true" type="types:UserContext" />
+        <xsd:element minOccurs="0" maxOccurs="unbounded" name="desiredLocales" type="xsd:string" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="getPortletPropertyDescriptionResponse" type="types:PortletPropertyDescriptionResponse" />
+  <xsd:element name="releaseSessions">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="registrationContext" nillable="true" type="types:RegistrationContext" />
+        <xsd:element maxOccurs="unbounded" name="sessionIDs" type="xsd:string" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="releaseSessionsResponse" type="types:ReturnAny" />
+  <xsd:element name="initCookie">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="registrationContext" nillable="true" type="types:RegistrationContext" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="initCookieResponse" type="types:ReturnAny" />
+  <xsd:complexType name="Fault">
+    <xsd:sequence />
+  </xsd:complexType>
+  <xsd:complexType name="AccessDeniedFault">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="types:Fault">
+        <xsd:sequence />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="AccessDenied" type="types:AccessDeniedFault" />
+  <xsd:complexType name="InconsistentParametersFault">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="types:Fault">
+        <xsd:sequence />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="InconsistentParameters" type="types:InconsistentParametersFault" />
+  <xsd:complexType name="InvalidRegistrationFault">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="types:Fault">
+        <xsd:sequence />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="InvalidRegistration" type="types:InvalidRegistrationFault" />
+  <xsd:complexType name="MissingParametersFault">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="types:Fault">
+        <xsd:sequence />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="MissingParameters" type="types:MissingParametersFault" />
+  <xsd:complexType name="OperationFailedFault">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="types:Fault">
+        <xsd:sequence />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="OperationFailed" type="types:OperationFailedFault" />
+  <xsd:complexType name="InvalidHandleFault">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="types:Fault">
+        <xsd:sequence />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="InvalidHandle" type="types:InvalidHandleFault" />
+  <xsd:complexType name="InvalidUserCategoryFault">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="types:Fault">
+        <xsd:sequence />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="InvalidUserCategory" type="types:InvalidUserCategoryFault" />
+  <xsd:complexType name="PortletStateChangeRequiredFault">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="types:Fault">
+        <xsd:sequence />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="PortletStateChangeRequired" type="types:PortletStateChangeRequiredFault" />
+  <xsd:complexType name="InvalidCookieFault">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="types:Fault">
+        <xsd:sequence />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="InvalidCookie" type="types:InvalidCookieFault" />
+  <xsd:complexType name="InvalidSessionFault">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="types:Fault">
+        <xsd:sequence />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="InvalidSession" type="types:InvalidSessionFault" />
+  <xsd:complexType name="UnsupportedModeFault">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="types:Fault">
+        <xsd:sequence />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="UnsupportedMode" type="types:UnsupportedModeFault" />
+  <xsd:complexType name="UnsupportedWindowStateFault">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="types:Fault">
+        <xsd:sequence />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="UnsupportedWindowState" type="types:UnsupportedWindowStateFault" />
+  <xsd:complexType name="UnsupportedLocaleFault">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="types:Fault">
+        <xsd:sequence />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="UnsupportedLocale" type="types:UnsupportedLocaleFault" />
+  <xsd:complexType name="UnsupportedMimeTypeFault">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="types:Fault">
+        <xsd:sequence />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="UnsupportedMimeType" type="types:UnsupportedMimeTypeFault" />
+</xsd:schema>

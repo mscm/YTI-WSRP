@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f63dd90a-8d6e-471c-8749-a65ac12c1392" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://www.oasis-open.org/committees/wsrp/specifications/version1/wsrp_v1_bindings.wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="wsrp_v1_interfaces.wsdl" MetadataType="Wsdl" ID="2f5916a1-b77f-443d-8b66-556b6b0a0bc7" SourceId="1" SourceUrl="https://www.oasis-open.org/committees/wsrp/specifications/version1/wsrp_v1_interfaces.wsdl" />
+    <MetadataFile FileName="wsrp_v1_bindings.wsdl" MetadataType="Wsdl" ID="ab42658f-8f72-4435-914e-c1bf29c324ae" SourceId="1" SourceUrl="https://www.oasis-open.org/committees/wsrp/specifications/version1/wsrp_v1_bindings.wsdl" />
+    <MetadataFile FileName="xml.xsd" MetadataType="Schema" ID="7c13d978-af8b-412a-ad1b-9a83a290ce98" SourceId="1" SourceUrl="http://www.w3.org/2001/xml.xsd" />
+    <MetadataFile FileName="wsrp_v1_types.xsd" MetadataType="Schema" ID="5695e40a-6450-406b-9d28-76666098fc9e" SourceId="1" SourceUrl="https://www.oasis-open.org/committees/wsrp/specifications/version1/wsrp_v1_types.xsd" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
